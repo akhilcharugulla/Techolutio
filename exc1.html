@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        table {
+            width:500px;
+            border-collapse: collapse;
+            border: 1px solid black;
+            font-size: large;
+            text-align: left;
+        }
+        tr{
+        text-transform:capitalize;
+        }
+        .fail{
+            color:red;
+        }
+        .pass{
+            color: black;
+        }
+        .topper{
+            color:green;
+        }
+        .total{
+            text-align: right;
+        }
+    </style>
+    <body>
+        <p id="display"></p>
+        <script>
+            var max=-1,data = [{ "name": "rajiv", "marks": { "Maths": "18", "English": "21", "Science": "45" }, "rollNumber": "KV2017-5A2"},{ "name": "abhishek", "marks": { "Maths": "43", "English": "30", "Science": "37" }, "rollNumber": "KV2017-5A1" },{ "name": "zoya", "marks": { "Maths": "42", "English": "31", "Science": "50" }, "rollNumber": "KV2017-5A3" }];
+            data.sort(function(a, b){
+                if (a.name.toLowerCase() < b.name.toLowerCase()) return -1
+                if (a.name.toLowerCase() > b.name.toLowerCase()) return 1
+                return 0
+            })
+            for(var i=0;i<data.length;i++){
+                data[i]["total"]=parseInt(data[i].marks.Maths)+parseInt(data[i].marks.English)+parseInt(data[i].marks.Science);
+                if(parseInt(data[i].marks.Maths)<20||parseInt(data[i].marks.English)<20||parseInt(data[i].marks.Science)<20){
+                    data[i]["status"]="Fail";
+                } else {
+                    data[i]["status"]="Pass";
+                }
+                if(data[i]["total"]>max){
+                    max=data[i]["total"];
+                }
+            }
+            for(var i=0;i<data.length;i++){
+                if(data[i]["total"]==max){
+                    data[i]["status"]="Topper";
+                }
+            }
+
+            var resTable="";
+            resTable+="<table border='1'><tr><th colspan='4'><b>Students Result Board</b></th></tr>";
+            resTable+="<tr><th><i><b>Student Name</b></i></th><th><i><b>Roll Number</b></i></th><th><i><b>Total Marks</b></i></th><th><i><b>Status</b></i></th></tr>";
+            for(var i=0;i<data.length;i++){
+                if(data[i].status=="Fail") {
+                    resTable+="<tr class=\"fail\"><td>" + data[i].name + "</td><td>" + data[i].rollNumber + "</td><td class=\"total\">" + data[i].total + "</td><td>" + data[i].status + "</td></tr>";
+                }
+                else if (data[i].status=="Topper"){
+                    resTable+="<tr class=\"topper\"><td>" + data[i].name + "</td><td>" + data[i].rollNumber + "</td><td class=\"total\">" + data[i].total + "</td><td>" + data[i].status + "</td></tr>";
+                }
+                else {
+                    resTable+="<tr class=\"pass\"><td>" + data[i].name + "</td><td>" + data[i].rollNumber + "</td><td class=\"total\">" + data[i].total + "</td><td>" + data[i].status + "</td></tr>";
+                }
+            }
+            resTable+="</table>";
+            document.getElementById("display").innerHTML=resTable;
+        </script>
+    </body>
+</html>

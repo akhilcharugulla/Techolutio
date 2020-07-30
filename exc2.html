@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+input[type=text]{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=number]{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+</style>
+</head>
+<body>
+
+<script>
+function validate(akh) {
+	var valid = true;
+	valid = checkEmpty($(akh));		
+	$("#btn-submit").attr("disabled",true);
+	if(valid) {
+	      $("#btn-submit").attr("disabled",false);
+		  }	
+      }
+function checkEmpty(obj) {
+	if($(obj).val() == "") {
+	      return false;
+		    }
+	return true;	
+     }
+          
+</script>
+<h2><b>HTML FORM</b></h2>
+<div>
+<form  name="myForm" method="post" >
+<label for="name" >Name</label><br>
+<input type="text" id="name" name="name" placeholder="Enter firstname" maxlength="20" onblur="validate('#name')" style="font-size:15px" pattern="[A-Za-z]+" title="takes alphabets only" ><br>
+<label for="lname" >Last Name</label><br>
+<input type="text" id="lname" name="lname" placeholder="Enter lastname" maxlength="20" onblur="validate('#lname')" style="font-size:15px" pattern="[A-Za-z]+" title="takes alphabets only" ><br>
+<label for="clas" >Class</label><br>
+<input type="text" id="clas" name="clas" onblur="validate('#clas')" placeholder="Enter Class" style="font-size:15px" ><br>
+<label for="yop" >Year of Passing</label><br>
+<input type="number" id="yop" name="yop" onblur="validate('#yop')" placeholder="Enter PassingYear" max=2017 style="font-size:15px" required><br>
+<label for="pom" >Percentage of Marks</label><br>
+<input type="number" id="pom" name="pom" onblur="validate(#pom)" placeholder="Enter Percentage" max=100 step="0.01" required><br><br>
+<button type="submit" id="btn-submit" disabled="disabled" style="font-size:25px"> Submit </button>
+</form> 
+</div>
+</body>
+</html>
